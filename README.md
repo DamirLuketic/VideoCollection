@@ -1,3 +1,6 @@
+# Personal
+    -> ng cli -> ng g c xy -> if inside app/components -> in module adjust path 
+
 # VideoCollection
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.1.
