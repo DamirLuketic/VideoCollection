@@ -22,6 +22,12 @@ import { UsersComponent } from './components/users/users.component';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 /**
+ * Services
+ */
+import { RootService } from "./shared/services/root.service";
+import { AuthService } from "./shared/services/auth.service";
+
+/**
  * Providers
  */
 
@@ -40,7 +46,7 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
       HttpClientModule,
       routes
   ],
-  providers: [],
+  providers: [RootService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
