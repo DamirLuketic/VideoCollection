@@ -5,6 +5,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routes } from "./app.routes";
+import { ReactiveFormsModule } from "@angular/forms";
+
 
 /**
  * Components
@@ -44,7 +46,8 @@ import { AuthService } from "./shared/services/auth.service";
   imports: [
     BrowserModule,
       HttpClientModule,
-      routes
+      routes,
+      ReactiveFormsModule,
   ],
   providers: [RootService, AuthService],
   bootstrap: [AppComponent]
