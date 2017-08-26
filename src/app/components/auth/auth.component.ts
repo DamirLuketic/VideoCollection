@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators} from "@angular/forms";
+import { CookieService } from "angular2-cookie/core";
 
 @Component({
   selector: 'vc-auth',
@@ -12,6 +13,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
       private formBuilder: FormBuilder,
+      private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -35,7 +37,10 @@ export class AuthComponent implements OnInit {
     });
 
     submitLogin(){
-
+        let formValue = this.loginForm.value;
+        let remember = formValue['remember'];
+        delete formValue['remember'];
+        let loginData = formValue;
     }
 
     /**
@@ -44,11 +49,28 @@ export class AuthComponent implements OnInit {
     public registerForm = this.formBuilder.group({
         name: ['', [Validators.required, Validators.minLength(2)]],
         email: ['', Validators.required],
-        password: ['', Validators.required, Validators.minLength(6)],
+        password: ['', [Validators.required, Validators.minLength(6)]],
         repeatPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
 
     submitRegister(){
+        let formValue = this.registerForm.value;
+        if(formValue['password'] == formValue['repeatPassword']){
+            delete formValue['repeatPassword'];
+            let regitrationData = formValue;
+        }else{
+            alert('Password and repeated password don\'t match');
+        }
+    }
 
+    passwordLength(){
+        const password = this.registerForm.value.password;
+        if(password != null){
+            if(password.length >= 6){
+                return true;
+            }
+        }else {
+            return false;
+        }
     }
 }

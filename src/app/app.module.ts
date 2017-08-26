@@ -7,7 +7,6 @@ import { NgModule } from '@angular/core';
 import { routes } from "./app.routes";
 import { ReactiveFormsModule } from "@angular/forms";
 
-
 /**
  * Components
  */
@@ -28,6 +27,7 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
  */
 import { RootService } from "./shared/services/root.service";
 import { AuthService } from "./shared/services/auth.service";
+  import { CookieService } from "angular2-cookie/core";
 
 /**
  * Providers
@@ -49,7 +49,7 @@ import { AuthService } from "./shared/services/auth.service";
       routes,
       ReactiveFormsModule,
   ],
-  providers: [RootService, AuthService],
+  providers: [RootService, AuthService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
