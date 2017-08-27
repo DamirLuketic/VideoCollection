@@ -16,7 +16,8 @@
       </li>
       <li><a routerLink='/videos' routerLinkActive="active">Videos</a></li>
       <li><a routerLink='/users' routerLinkActive="active">Users</a></li>
-      <li><a routerLink='/auth'>LogIn \ Register</a></li>
+      <li *ngIf="!isAuth()"><a routerLink='/auth'>LogIn \ Register</a></li>
+      <li *ngIf="isAuth()" (click)="logout()"><a routerLink='/auth'>Log out</a></li>
     </ul>
   </div>
 </nav>

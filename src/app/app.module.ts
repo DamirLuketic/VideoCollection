@@ -41,7 +41,7 @@ import { AuthService } from "./shared/services/auth.service";
     TopNaviComponent,
     AuthComponent,
     VideosComponent,
-    UsersComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

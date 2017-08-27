@@ -1,19 +1,30 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators} from "@angular/forms";
 import { CookieService } from "angular2-cookie/core";
+import {AuthService} from "../../shared/services/auth.service";
+import {Subscription} from "rxjs/Subscription";
+import {Login} from "../../shared/class/login";
+import {Register} from "../../shared/class/register";
+import {Auth} from "../../shared/class/auth";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'vc-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
 
   public isLogin: boolean = true;
 
+  private loginSubscription: Subscription = null;
+  private registrationSubsription: Subscription = null;
+
   constructor(
       private formBuilder: FormBuilder,
-      private cookieService: CookieService
+      private cookieService: CookieService,
+      private authService: AuthService,
+      private router: Router
   ) { }
 
   ngOnInit() {
@@ -36,11 +47,33 @@ export class AuthComponent implements OnInit {
         remember: ['']
     });
 
+    processAuth(data){
+        if(+(data) === 0){
+            console.log('False validation data');
+        }else if (+(data) === 1){
+            console.log('False password');
+        }else {
+            console.log(data);
+            this.authService.auth = data;
+            this.router.navigate(['/home']);
+        }
+    }
+
     submitLogin(){
         let formValue = this.loginForm.value;
-        let remember = formValue['remember'];
+        const remember = formValue['remember'];
         delete formValue['remember'];
-        let loginData = formValue;
+        let loginData: Login = formValue;
+
+        this.loginSubscription = this.authService.login(loginData).subscribe(
+            data => {
+                if(remember == true){
+                    this.cookieService.putObject('auth', data);
+                }
+                this.processAuth(data)
+            },
+            error => {error}
+            );
     }
 
     /**
@@ -57,7 +90,12 @@ export class AuthComponent implements OnInit {
         let formValue = this.registerForm.value;
         if(formValue['password'] == formValue['repeatPassword']){
             delete formValue['repeatPassword'];
-            let regitrationData = formValue;
+            const regitrationData: Register = formValue;
+
+            this.registrationSubsription = this.authService.registration(regitrationData).subscribe(
+                data => {console.log(data)},
+                error => {console.log(error)}
+            );
         }else{
             alert('Password and repeated password don\'t match');
         }
@@ -71,6 +109,15 @@ export class AuthComponent implements OnInit {
             }
         }else {
             return false;
+        }
+    }
+
+    ngOnDestroy(){
+        if(this.loginSubscription != null){
+            this.loginSubscription.unsubscribe();
+        }
+        if(this.registrationSubsription != null){
+            this.registrationSubsription.unsubscribe();
         }
     }
 }
