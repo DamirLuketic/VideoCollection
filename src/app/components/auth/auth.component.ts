@@ -47,7 +47,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         remember: ['']
     });
 
-    processAuth(data){
+    processAuth(data, remember){
         if(+(data) === 0){
             console.log('False validation data');
         }else if (+(data) === 1){
@@ -55,6 +55,9 @@ export class AuthComponent implements OnInit, OnDestroy {
         }else {
             console.log(data);
             this.authService.auth = data;
+            if(remember == true){
+                this.cookieService.putObject('auth', data);
+            }
             this.router.navigate(['/home']);
         }
     }
@@ -67,10 +70,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
         this.loginSubscription = this.authService.login(loginData).subscribe(
             data => {
-                if(remember == true){
-                    this.cookieService.putObject('auth', data);
-                }
-                this.processAuth(data)
+                this.processAuth(data, remember)
             },
             error => {error}
             );
@@ -110,6 +110,10 @@ export class AuthComponent implements OnInit, OnDestroy {
         }else {
             return false;
         }
+    }
+
+    onCancel(){
+        this.registerForm.reset();
     }
 
     ngOnDestroy(){

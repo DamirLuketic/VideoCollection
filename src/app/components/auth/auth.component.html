@@ -91,7 +91,7 @@
 
                     <div class="col-xs-12">
                       <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Register</button>
-                      <a class="btn btn-danger">Clear</a>
+                      <a class="btn btn-danger" (click)="onCancel()">Clear</a>
                       <p style="text-align: right">* min. 6 symbols</p>
                     </div>
 
