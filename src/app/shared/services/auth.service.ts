@@ -23,7 +23,7 @@ export class AuthService {
 
   registration(registrationData: Register){
     const body = registrationData;
-    return this.http.post(this.apiRoute + 'test', body);
+    return this.http.post(this.apiRoute + 'user', body);
   }
 
 }

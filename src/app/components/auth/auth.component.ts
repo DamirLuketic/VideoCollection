@@ -47,7 +47,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         remember: ['']
     });
 
-    processAuth(data, remember){
+    processLogin(data, remember){
         if(+(data) === 0){
             console.log('False validation data');
         }else if (+(data) === 1){
@@ -70,7 +70,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
         this.loginSubscription = this.authService.login(loginData).subscribe(
             data => {
-                this.processAuth(data, remember)
+                this.processLogin(data, remember);
             },
             error => {error}
             );
@@ -86,6 +86,15 @@ export class AuthComponent implements OnInit, OnDestroy {
         repeatPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
 
+    processRegister(data){
+        if(+(data) === 0){
+            console.log('Email or username in use');
+        }else {
+            console.log('User set');
+            this.router.navigate(['/home']);
+        }
+    }
+
     submitRegister(){
         let formValue = this.registerForm.value;
         if(formValue['password'] == formValue['repeatPassword']){
@@ -93,7 +102,7 @@ export class AuthComponent implements OnInit, OnDestroy {
             const regitrationData: Register = formValue;
 
             this.registrationSubsription = this.authService.registration(regitrationData).subscribe(
-                data => {console.log(data)},
+                data => {this.processRegister(data)},
                 error => {console.log(error)}
             );
         }else{
