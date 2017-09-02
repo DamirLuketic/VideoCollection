@@ -47,11 +47,17 @@
                   </div>
                 </div>
 
-                <div class="row">
+                <div class="row" *ngIf="loginError">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <div class="errorShow">{{ loginErrorMsg }}</div>
+                    </div>
+                  </div>
+                </div>
+
                   <div class="col-xs-12">
                     <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Login</button>
                   </div>
-                </div>
 
               </form>
 

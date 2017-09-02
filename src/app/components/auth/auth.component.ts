@@ -16,6 +16,8 @@ import {Router} from "@angular/router";
 export class AuthComponent implements OnInit, OnDestroy {
 
   public isLogin: boolean = true;
+  public loginError: boolean = false;
+  public loginErrorMsg: string = '';
 
   private loginSubscription: Subscription = null;
   private registrationSubsription: Subscription = null;
@@ -49,9 +51,11 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     processLogin(data, remember){
         if(+(data) === 0){
-            console.log('False validation data');
+            this.loginError = true;
+            this.loginErrorMsg = 'False validation data';
         }else if (+(data) === 1){
-            console.log('False password');
+            this.loginError = true;
+            this.loginErrorMsg = 'False password';
         }else {
             console.log(data);
             this.authService.auth = data;
@@ -72,7 +76,7 @@ export class AuthComponent implements OnInit, OnDestroy {
             data => {
                 this.processLogin(data, remember);
             },
-            error => {error}
+            error => {console.log(error)}
             );
     }
 
@@ -131,6 +135,10 @@ export class AuthComponent implements OnInit, OnDestroy {
         }
         if(this.registrationSubsription != null){
             this.registrationSubsription.unsubscribe();
+        }
+        if(this.loginError != false){
+            this.loginError = false;
+            this.loginErrorMsg = '';
         }
     }
 }
