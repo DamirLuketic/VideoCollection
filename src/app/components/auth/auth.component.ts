@@ -5,7 +5,6 @@ import {AuthService} from "../../shared/services/auth.service";
 import {Subscription} from "rxjs/Subscription";
 import {Login} from "../../shared/class/login";
 import {Register} from "../../shared/class/register";
-import {Auth} from "../../shared/class/auth";
 import {Router} from "@angular/router";
 
 @Component({
@@ -37,6 +36,9 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   toRegister(){
+      if(this.loginError == true){
+          this.loginError = false;
+      }
     this.isLogin = false;
   }
 
@@ -44,22 +46,24 @@ export class AuthComponent implements OnInit, OnDestroy {
      * Login part
      */
     public loginForm = this.formBuilder.group({
-        emailName: ['', Validators.required],
+        nameEmail: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]],
         remember: ['']
     });
 
-    processLogin(data, remember){
+    processLogin(data, remember: boolean, nameEmail: string){
         if(+(data) === 0){
             this.loginError = true;
             this.loginErrorMsg = 'False validation data';
+            this.loginForm.reset();
         }else if (+(data) === 1){
             this.loginError = true;
             this.loginErrorMsg = 'False password';
+            this.loginForm.reset({nameEmail: nameEmail});
         }else {
             console.log(data);
             this.authService.auth = data;
-            if(remember == true){
+            if(remember === true){
                 this.cookieService.putObject('auth', data);
             }
             this.router.navigate(['/home']);
@@ -74,7 +78,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
         this.loginSubscription = this.authService.login(loginData).subscribe(
             data => {
-                this.processLogin(data, remember);
+                this.processLogin(data, remember, loginData.nameEmail);
             },
             error => {console.log(error)}
             );

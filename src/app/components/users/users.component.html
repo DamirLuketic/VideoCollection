@@ -1,3 +1,14 @@
-<p>
-  users works!
-</p>
+<button *ngIf="!popupSmall" class="btn btn-info" (click)="toggleSmallPopup()">Popup</button>
+
+<div [hidden]="!popupSmall" #popup>
+  <div class="popup">
+    <div class="popup-body">
+      <h1>Test popup</h1>
+      <p>
+        Test text.
+      </p>
+      <button (click)="toggleSmallPopup();">Close</button>
+    </div>
+  </div>
+  <div class="popup-background"></div>
+</div>
