@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, DoCheck} from '@angular/core';
 import { FormBuilder, Validators} from "@angular/forms";
 import { CookieService } from "angular2-cookie/core";
 import {AuthService} from "../../shared/services/auth.service";
@@ -12,11 +12,11 @@ import {Router} from "@angular/router";
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit, OnDestroy {
+export class AuthComponent implements OnInit, OnDestroy, DoCheck {
 
   public isLogin: boolean = true;
-  public loginError: boolean = false;
-  public loginErrorMsg: string = '';
+  public authError: boolean = false;
+  public authErrorMsg: string = '';
 
   private loginSubscription: Subscription = null;
   private registrationSubsription: Subscription = null;
@@ -31,14 +31,20 @@ export class AuthComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  toLogin(){
-    this.isLogin = true;
+  clearError() {
+      if(this.authError === true){
+          this.authError = false;
+          this.authErrorMsg = '';
+      }
   }
 
-  toRegister(){
-      if(this.loginError == true){
-          this.loginError = false;
-      }
+  toLogin() {
+      this.clearError();
+        this.isLogin = true;
+  }
+
+  toRegister() {
+    this.clearError();
     this.isLogin = false;
   }
 
@@ -52,18 +58,18 @@ export class AuthComponent implements OnInit, OnDestroy {
     });
 
     processLogin(data, remember: boolean, nameEmail: string){
-        if(+(data) === 0){
-            this.loginError = true;
-            this.loginErrorMsg = 'False validation data';
+        if (+(data) === 0){
+            this.authError = true;
+            this.authErrorMsg = 'False validation data';
             this.loginForm.reset();
         }else if (+(data) === 1){
-            this.loginError = true;
-            this.loginErrorMsg = 'False password';
+            this.authError = true;
+            this.authErrorMsg = 'False password';
             this.loginForm.reset({nameEmail: nameEmail});
         }else {
             console.log(data);
             this.authService.auth = data;
-            if(remember === true){
+            if (remember === true){
                 this.cookieService.putObject('auth', data);
             }
             this.router.navigate(['/home']);
@@ -71,10 +77,10 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     submitLogin(){
-        let formValue = this.loginForm.value;
+        const formValue = this.loginForm.value;
         const remember = formValue['remember'];
         delete formValue['remember'];
-        let loginData: Login = formValue;
+        const loginData: Login = formValue;
 
         this.loginSubscription = this.authService.login(loginData).subscribe(
             data => {
@@ -95,7 +101,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     });
 
     processRegister(data){
-        if(+(data) === 0){
+        if (+(data) === 0){
             console.log('Email or username in use');
         }else {
             console.log('User set');
@@ -104,8 +110,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     submitRegister(){
-        let formValue = this.registerForm.value;
-        if(formValue['password'] == formValue['repeatPassword']){
+        const formValue = this.registerForm.value;
+        if (formValue['password'] === formValue['repeatPassword']){
             delete formValue['repeatPassword'];
             const regitrationData: Register = formValue;
 
@@ -113,15 +119,15 @@ export class AuthComponent implements OnInit, OnDestroy {
                 data => {this.processRegister(data)},
                 error => {console.log(error)}
             );
-        }else{
+        }else {
             alert('Password and repeated password don\'t match');
         }
     }
 
     passwordLength(){
         const password = this.registerForm.value.password;
-        if(password != null){
-            if(password.length >= 6){
+        if (password != null){
+            if (password.length >= 6) {
                 return true;
             }
         }else {
@@ -133,16 +139,21 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.registerForm.reset();
     }
 
+    ngDoCheck() {
+        if (this.authError === true) {
+            setInterval(() => {
+                this.authError = false;
+                this.authErrorMsg = '';
+                }, 2000);
+            }
+        }
+
     ngOnDestroy(){
-        if(this.loginSubscription != null){
+        if (this.loginSubscription != null){
             this.loginSubscription.unsubscribe();
         }
-        if(this.registrationSubsription != null){
+        if (this.registrationSubsription != null){
             this.registrationSubsription.unsubscribe();
-        }
-        if(this.loginError != false){
-            this.loginError = false;
-            this.loginErrorMsg = '';
         }
     }
 }
