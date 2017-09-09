@@ -101,8 +101,10 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
     });
 
     processRegister(data){
-        if (+(data) === 0){
-            console.log('Email or username in use');
+        // console.log(data);
+        if (data['register_error']){
+            this.authError = true;
+            this.authErrorMsg = data['register_error'];
         }else {
             console.log('User set');
             this.router.navigate(['/home']);
@@ -120,7 +122,8 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
                 error => {console.log(error)}
             );
         }else {
-            alert('Password and repeated password don\'t match');
+            this.authError = true;
+            this.authErrorMsg = 'Password and repeated password don\'t match';
         }
     }
 
