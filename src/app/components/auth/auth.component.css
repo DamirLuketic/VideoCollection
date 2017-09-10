@@ -104,23 +104,3 @@ body {
     background-color: #1CA347;
     border-color: #1CA347;
 }
-
-/**
-Popup
- */
-.popup {
-    position: fixed;
-    top: 0;
-    right: 150px;
-}
-.popup > .popup-body {
-    padding: 20px;
-    background: snow;
-    opacity: 0.92;
-    width: 350px;
-    margin: 40px;
-    color: red;
-    text-align: center;
-    font-size: 145%;
-    border-radius: 12px;
-}

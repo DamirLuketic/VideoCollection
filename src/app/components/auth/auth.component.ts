@@ -1,11 +1,12 @@
-import {Component, OnInit, OnDestroy, DoCheck} from '@angular/core';
-import { FormBuilder, Validators} from "@angular/forms";
+import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
+import { FormBuilder, Validators } from "@angular/forms";
 import { CookieService } from "angular2-cookie/core";
-import {AuthService} from "../../shared/services/auth.service";
-import {Subscription} from "rxjs/Subscription";
-import {Login} from "../../shared/class/login";
-import {Register} from "../../shared/class/register";
-import {Router} from "@angular/router";
+import { AuthService } from "../../shared/services/auth.service";
+import { Subscription } from "rxjs/Subscription";
+import { Login } from "../../shared/class/login";
+import { Register } from "../../shared/class/register";
+import { Router } from "@angular/router";
+import { MessageService } from "../../shared/services/message.service";
 
 @Component({
   selector: 'vc-auth',
@@ -16,7 +17,7 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
 
   public isLogin: boolean = true;
   public authError: boolean = false;
-  public authErrorMsg: string = '';
+  public authErrorMsg: string = null;
 
   private loginSubscription: Subscription = null;
   private registrationSubsription: Subscription = null;
@@ -25,16 +26,17 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
       private formBuilder: FormBuilder,
       private cookieService: CookieService,
       private authService: AuthService,
-      private router: Router
+      private router: Router,
+      private messageService: MessageService
   ) { }
 
   ngOnInit() {
   }
 
   clearError() {
-      if(this.authError === true){
+      if (this.authError === true){
           this.authError = false;
-          this.authErrorMsg = '';
+          this.authErrorMsg = null;
       }
   }
 
@@ -72,11 +74,12 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
             if (remember === true){
                 this.cookieService.putObject('auth', data);
             }
+            this.messageService.message = 'You are login';
             this.router.navigate(['/home']);
         }
     }
 
-    submitLogin(){
+    submitLogin() {
         const formValue = this.loginForm.value;
         const remember = formValue['remember'];
         delete formValue['remember'];
@@ -86,7 +89,7 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
             data => {
                 this.processLogin(data, remember, loginData.nameEmail);
             },
-            error => {console.log(error)}
+            error => { console.log(error); }
             );
     }
 
@@ -100,8 +103,7 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
         repeatPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-    processRegister(data){
-        // console.log(data);
+    processRegister(data) {
         if (data['register_error']){
             this.authError = true;
             this.authErrorMsg = data['register_error'];
@@ -111,7 +113,7 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
         }
     }
 
-    submitRegister(){
+    submitRegister() {
         const formValue = this.registerForm.value;
         if (formValue['password'] === formValue['repeatPassword']){
             delete formValue['repeatPassword'];
@@ -127,7 +129,7 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
         }
     }
 
-    passwordLength(){
+    passwordLength() {
         const password = this.registerForm.value.password;
         if (password != null){
             if (password.length >= 6) {
@@ -138,16 +140,16 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
         }
     }
 
-    onCancel(){
+    onCancel() {
         this.registerForm.reset();
     }
 
     ngDoCheck() {
         if (this.authError === true) {
-            setInterval(() => {
+            setTimeout(() => {
                 this.authError = false;
-                this.authErrorMsg = '';
-                }, 2000);
+                this.authErrorMsg = null;
+                }, 3200);
             }
         }
 

@@ -16,6 +16,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { VideosComponent } from './components/videos/videos.component';
 import { UsersComponent } from './components/users/users.component';
+import { PrivateVideosComponent } from './components/private/private-videos/private-videos.component';
+import { PrivateProfileComponent } from './components/private/private-profile/private-profile.component';
 
 /**
  * Directives
@@ -27,7 +29,8 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
  */
 import { RootService } from "./shared/services/root.service";
 import { AuthService } from "./shared/services/auth.service";
-  import { CookieService } from "angular2-cookie/core";
+import { CookieService } from "angular2-cookie/core";
+import { MessageService } from "./shared/services/message.service";
 
 
 /**
@@ -42,7 +45,9 @@ import { AuthService } from "./shared/services/auth.service";
     TopNaviComponent,
     AuthComponent,
     VideosComponent,
-    UsersComponent
+    UsersComponent,
+    PrivateVideosComponent,
+    PrivateProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,7 @@ import { AuthService } from "./shared/services/auth.service";
       routes,
       ReactiveFormsModule,
   ],
-  providers: [RootService, AuthService, CookieService],
+  providers: [RootService, AuthService, CookieService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

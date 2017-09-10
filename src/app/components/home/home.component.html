@@ -1,3 +1,11 @@
 <p>
   home works!
 </p>
+
+<div [hidden]="!hasMessage">
+  <div class="popup">
+    <div class="popup-body">
+      <p>{{ messageText }}</p>
+    </div>
+  </div>
+</div>
