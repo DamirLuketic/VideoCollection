@@ -1,3 +1,25 @@
-<p>
-  private-profile works!
-</p>
+<div class="container">
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" class="form-control" formControlName="name">
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="text" id="email" class="form-control" formControlName="email" email>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+</div>

@@ -30,6 +30,19 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
       private messageService: MessageService
   ) { }
 
+    public loginForm = this.formBuilder.group({
+        nameEmail: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        remember: ['']
+    });
+
+    public registerForm = this.formBuilder.group({
+        name: ['', [Validators.required, Validators.minLength(2)]],
+        email: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        repeatPassword: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
   ngOnInit() {
   }
 
@@ -53,12 +66,6 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
     /**
      * Login part
      */
-    public loginForm = this.formBuilder.group({
-        nameEmail: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        remember: ['']
-    });
-
     processLogin(data, remember: boolean, nameEmail: string){
         if (+(data) === 0){
             this.authError = true;
@@ -69,10 +76,11 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
             this.authErrorMsg = 'False password';
             this.loginForm.reset({nameEmail: nameEmail});
         }else {
-            console.log(data);
             this.authService.auth = data;
             if (remember === true){
-                this.cookieService.putObject('auth', data);
+                let expireDate = new Date();
+                expireDate.setDate(expireDate.getDate() + 1);
+                this.cookieService.putObject('auth', data, {expires: expireDate});
             }
             this.messageService.message = 'You are login';
             this.router.navigate(['/home']);
@@ -96,13 +104,6 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
     /**
      * Register part
      */
-    public registerForm = this.formBuilder.group({
-        name: ['', [Validators.required, Validators.minLength(2)]],
-        email: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        repeatPassword: ['', [Validators.required, Validators.minLength(6)]]
-    });
-
     processRegister(data) {
         if (data['register_error']){
             this.authError = true;
