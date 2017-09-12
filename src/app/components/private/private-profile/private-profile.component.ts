@@ -20,11 +20,11 @@ export class PrivateProfileComponent implements OnInit {
       name: [this.authData.name, Validators.required],
       email: [this.authData.email, Validators.required],
       isVisible: [+(this.authData.is_visible), Validators.required],
-      countryId: [this.authData.country_id]
+      countryId: [+(this.authData.country_id)]
   });
 
   ngOnInit() {
-      console.log(+(this.authData.is_visible));
+      console.log(+(this.authData.country_id));
   }
 
   submitProfile() {
