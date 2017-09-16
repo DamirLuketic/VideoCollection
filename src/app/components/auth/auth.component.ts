@@ -7,6 +7,7 @@ import { Login } from "../../shared/class/login";
 import { Register } from "../../shared/class/register";
 import { Router } from "@angular/router";
 import { MessageService } from "../../shared/services/message.service";
+import {Auth} from "../../shared/class/auth";
 
 @Component({
   selector: 'vc-auth',
@@ -94,8 +95,8 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
         const loginData: Login = formValue;
 
         this.loginSubscription = this.authService.login(loginData).subscribe(
-            data => {
-                this.processLogin(data, remember, loginData.nameEmail);
+            (data) => {
+                    this.processLogin(data, remember, loginData.nameEmail);
             },
             error => { console.log(error); }
             );

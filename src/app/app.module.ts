@@ -31,7 +31,7 @@ import { RootService } from "./shared/services/root.service";
 import { AuthService } from "./shared/services/auth.service";
 import { CookieService } from "angular2-cookie/core";
 import { MessageService } from "./shared/services/message.service";
-
+import { CountriesService } from "./shared/services/countries.service";
 
 /**
  * Providers
@@ -55,7 +55,13 @@ import { MessageService } from "./shared/services/message.service";
       routes,
       ReactiveFormsModule,
   ],
-  providers: [RootService, AuthService, CookieService, MessageService],
+  providers: [
+              RootService,
+              AuthService,
+              CookieService,
+              MessageService,
+              CountriesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

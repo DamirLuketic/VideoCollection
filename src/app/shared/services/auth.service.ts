@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { RootService } from "./root.service";
 import { HttpClient } from "@angular/common/http";
-import {Login} from "../class/login";
-import {Register} from "../class/register";
+import { Login } from "../class/login";
+import { Register } from "../class/register";
+import { Auth } from "../class/auth";
 
 @Injectable()
 export class AuthService {
