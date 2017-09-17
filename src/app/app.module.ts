@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routes } from "./app.routes";
 import { ReactiveFormsModule } from "@angular/forms";
+import { Select2Module } from 'ng2-select2';
 
 /**
  * Components
@@ -47,13 +48,14 @@ import { CountriesService } from "./shared/services/countries.service";
     VideosComponent,
     UsersComponent,
     PrivateVideosComponent,
-    PrivateProfileComponent
+    PrivateProfileComponent,
   ],
   imports: [
     BrowserModule,
       HttpClientModule,
       routes,
       ReactiveFormsModule,
+      Select2Module
   ],
   providers: [
               RootService,
