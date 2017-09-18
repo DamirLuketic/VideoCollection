@@ -5,27 +5,13 @@
             <div class="row">
 
                 <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" class="form-control" formControlName="name">
-                    </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="email">E-mail:</label>
-                        <input type="text" id="email" class="form-control" formControlName="email" email>
-                    </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <p><b>Visible:</b></p>
+                    <p><b>Profile visible:</b></p>
                     <div>
                         <label>Yes
-                            <input type="radio" formControlName="isVisible" [value]="1">
+                            <input type="radio" formControlName="is_visible" [value]="1">
                         </label>
                         <label>No
-                            <input type="radio" formControlName="isVisible" [value]="0">
+                            <input type="radio" formControlName="is_visible" [value]="0">
                         </label>
                     </div>
                 </div>
@@ -38,6 +24,11 @@
                              [options]="countriesOptions"
                              [value]="userCountry ? userCountry.split(',') : ''"
                             ></select2>
+                </div>
+
+                <div class="col-xs-12">
+                    <br />
+                    <button type="submit" class="btn btn-success pull-right" [disabled]="!profileForm.valid">Update</button>
                 </div>
 
             </div>

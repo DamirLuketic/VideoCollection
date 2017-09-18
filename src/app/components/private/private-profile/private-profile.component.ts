@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, OnChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../../shared/services/auth.service";
 import { Auth } from "../../../shared/class/auth";
@@ -14,7 +14,7 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class PrivateProfileComponent implements OnInit, OnDestroy {
 
-    @ViewChild('select2Countries') select2Countries: HTMLElement;
+    @ViewChild('select2Countries') select2Countries: ElementRef;
 
     public countriesList: Country[] = null;
     private getCountriesSubscription: Subscription = null;
@@ -30,9 +30,7 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
 
   private authData: Auth = this.authService.auth;
   public profileForm = this.formBuilder.group({
-      name: [this.authData.name, Validators.required],
-      email: [this.authData.email, Validators.required],
-      isVisible: [+(this.authData.is_visible), Validators.required],
+      is_visible: [+(this.authData.is_visible), Validators.required],
       country_code: [this.userCountry]
   });
 
@@ -67,22 +65,30 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
       });
 
       /**
-       * TODO: After test use select2Countries "HTML Elements" instead id with JQuery
+       // * TODO: After test use select2Countries "HTML Elements" instead id with JQuery / Implement ngOnChanges
        */
-    // let data = this.test2['selector']['nativeElement']['options'];
-    //
-    //   this.test2.onchange(function () {
-    //       this.userCountry = data[data['selectedIndex']]['value'];
-    //   });
-    //
-    //   setTimeout(() => {
-    //       // this.userCountry = data[data['selectedIndex']]['value'];
-    //       console.log(this.userCountry);
-    //   }, 350);
+      //   let data = this.select2Countries['selector']['nativeElement']['options'];
+      //
+      // setTimeout(() => {
+      //     this.userCountry = data[data['selectedIndex']]['value'];
+      //     console.log(this.userCountry);
+      // }, 350);
   }
 
   submitProfile() {
-    const formValue = this.profileForm.value;
+    let formValue = this.profileForm.value;
+    formValue['country_code'] = this.userCountry;
+    this.authService.update(formValue).subscribe(
+        (data: number) => {
+            if (+(data) === 1) {
+               this.authService.auth.is_visible = formValue.is_visible;
+               this.authService.auth.country_code = formValue.country_code;
+            }
+        },
+        (error) => {
+            console.log(error);
+        }
+    );
   }
 
   ngOnDestroy() {
