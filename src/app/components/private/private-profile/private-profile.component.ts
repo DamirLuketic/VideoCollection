@@ -17,10 +17,11 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
     @ViewChild('select2Countries') select2Countries: ElementRef;
 
     public countriesList: Country[] = null;
-    private getCountriesSubscription: Subscription = null;
     public countriesData: Array<Select2OptionData>;
     public countriesOptions: Select2Options;
     public userCountry: string = '';
+    private getCountriesSubscription: Subscription = null;
+    private updateSubscription: Subscription = null;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -78,7 +79,7 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
   submitProfile() {
     let formValue = this.profileForm.value;
     formValue['country_code'] = this.userCountry;
-    this.authService.update(formValue).subscribe(
+    this.updateSubscription = this.authService.update(formValue).subscribe(
         (data: number) => {
             if (+(data) === 1) {
                this.authService.auth.is_visible = formValue.is_visible;
@@ -94,6 +95,9 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.getCountriesSubscription != null ) {
         this.getCountriesSubscription.unsubscribe();
+    }
+    if (this.updateSubscription != null ) {
+        this.updateSubscription.unsubscribe();
     }
   }
 }
