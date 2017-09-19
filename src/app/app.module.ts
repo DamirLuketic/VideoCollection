@@ -33,6 +33,7 @@ import { AuthService } from "./shared/services/auth.service";
 import { CookieService } from "angular2-cookie/core";
 import { MessageService } from "./shared/services/message.service";
 import { CountriesService } from "./shared/services/countries.service";
+import { VideoService } from "./shared/services/video.service";
 
 /**
  * Providers
@@ -62,7 +63,8 @@ import { CountriesService } from "./shared/services/countries.service";
               AuthService,
               CookieService,
               MessageService,
-              CountriesService
+              CountriesService,
+              VideoService
   ],
   bootstrap: [AppComponent]
 })

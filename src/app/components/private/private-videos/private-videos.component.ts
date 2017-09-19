@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VideoService } from "../../../shared/services/video.service";
 
 @Component({
   selector: 'vc-private-videos',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivateVideosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private videoService: VideoService
+  ) { }
 
   ngOnInit() {
   }
