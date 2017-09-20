@@ -8,8 +8,7 @@ import { Register } from "../class/register";
 export class AuthService {
 
   public auth = null;
-
-  apiRoute: string = this.root.apiRoute;
+  private apiRoute: string = this.root.apiRoute;
 
   constructor(
       private root: RootService,
