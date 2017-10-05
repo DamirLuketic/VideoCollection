@@ -1,0 +1,28 @@
+.videoList {
+
+}
+
+
+
+table.videoList {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.videoList tr > th {
+    border: 1px solid #dddddd;
+    border-bottom: 4px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+table.videoList tr > td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 1px 3px 1px 3px;
+}
+
+table.videoList tr:nth-child(even) {
+    background-color: #dddddd;
+}

@@ -34,6 +34,7 @@ import { CookieService } from "angular2-cookie/core";
 import { MessageService } from "./shared/services/message.service";
 import { CountriesService } from "./shared/services/countries.service";
 import { VideoService } from "./shared/services/video.service";
+import { MediaTypeService } from "./shared/services/media-type.service";
 
 /**
  * Providers
@@ -64,7 +65,8 @@ import { VideoService } from "./shared/services/video.service";
               CookieService,
               MessageService,
               CountriesService,
-              VideoService
+              VideoService,
+              MediaTypeService
   ],
   bootstrap: [AppComponent]
 })

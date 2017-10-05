@@ -1,3 +1,22 @@
-<p>
-  private-videos works!
-</p>
+<table class="videoList" align="center">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Year</th>
+      <th>Genres</th>
+      <th>Director(s)</th>
+      <th>Media</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let v of personalCollection">
+      <td>{{ v.title }}</td>
+      <td>{{ v.year }}</td>
+      <td>{{ v.genres }}</td>
+      <td>{{ v.directors }}</td>
+      <td>{{ mediaTypes[v.media_type_id] }}</td>
+      <td>Add tools</td>
+    </tr>
+  </tbody>
+</table>

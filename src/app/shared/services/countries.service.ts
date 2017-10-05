@@ -6,7 +6,7 @@ import { RootService } from "./root.service";
 @Injectable()
 export class CountriesService {
 
-  public countriesList: Country[] = null;
+  public countriesList: Array<Country> = null;
 
   constructor(
       private root: RootService,
