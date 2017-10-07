@@ -6,7 +6,7 @@
       <th>Genres</th>
       <th>Director(s)</th>
       <th>Media</th>
-      <th></th>
+      <th>Tools</th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +16,11 @@
       <td>{{ v.genres }}</td>
       <td>{{ v.directors }}</td>
       <td>{{ mediaTypes[v.media_type_id] }}</td>
-      <td>Add tools</td>
+      <td class="videoTools">
+        <a title="View" href="#"><i class="fa fa-eye"></i></a>
+        <a title="Edit" href="#"><i class="fa fa-pencil"></i></a>
+        <a title="Remove" href="#"><i class="fa fa-trash"></i></a>
+      </td>
     </tr>
   </tbody>
 </table>

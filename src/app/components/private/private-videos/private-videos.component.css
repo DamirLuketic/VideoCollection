@@ -1,9 +1,6 @@
-.videoList {
-
-}
-
-
-
+/**
+    Collection view style
+ */
 table.videoList {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -20,9 +17,15 @@ table.videoList tr > th {
 table.videoList tr > td {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 1px 3px 1px 3px;
+    padding: 1px 3px 1px 8px;
 }
 
 table.videoList tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+/**
+    Collection tools style
+ */
+table.videoList tr > .videoTools > a > i{
 }
