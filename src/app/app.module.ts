@@ -19,6 +19,7 @@ import { VideosComponent } from './components/videos/videos.component';
 import { UsersComponent } from './components/users/users.component';
 import { PrivateVideosComponent } from './components/private/private-videos/private-videos.component';
 import { PrivateProfileComponent } from './components/private/private-profile/private-profile.component';
+import { VideoCreateComponent } from './components/private/video-create/video-create.component';
 
 /**
  * Directives
@@ -51,6 +52,7 @@ import { MediaTypeService } from "./shared/services/media-type.service";
     UsersComponent,
     PrivateVideosComponent,
     PrivateProfileComponent,
+    VideoCreateComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Video } from "../class/video";
-import {HttpClient} from "@angular/common/http";
-import {RootService} from "./root.service";
-import {AuthService} from "./auth.service";
+import { HttpClient } from "@angular/common/http";
+import { RootService } from "./root.service";
+import { AuthService } from "./auth.service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class VideoService {
@@ -17,6 +18,11 @@ export class VideoService {
   ) { }
 
   catchPersonal() {
-    return this.http.post(this.apiRoute + 'video/personal', this.authService.auth.id);
+    const user_id = this.authService.auth.id;
+    return this.http.post(this.apiRoute + 'video/personal', user_id);
+  }
+
+  crateVideo(video: Video) {
+    return this.http.post(this.apiRoute + 'video', video);
   }
 }
