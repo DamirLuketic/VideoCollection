@@ -15,7 +15,7 @@
       <td>{{ v.year }}</td>
       <td>{{ v.genres }}</td>
       <td>{{ v.directors }}</td>
-      <td>{{ mediaTypes[v.media_type_id] }}</td>
+      <td>{{ getMediaTypeName( v.media_type_id )}}</td>
       <td class="videoTools">
         <a title="View" href="#"><i class="fa fa-eye"></i></a>
         <a title="Edit" href="#"><i class="fa fa-pencil"></i></a>

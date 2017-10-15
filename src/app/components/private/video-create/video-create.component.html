@@ -1,3 +1,20 @@
-<p>
-  video-create works!
-</p>
+<div id="createVideo">
+    <form [formGroup]="createVideo">
+        <fieldset>
+            <legend>Add video to collection</legend>
+            <div class="row">
+
+                <!-- Media type -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="mediaType">Media type:</label>
+                        <select id="mediaType" class="form-control" formControlName="media_type_id">
+                            <option *ngFor="let mt of mediaTypes" value="{{ mt.id }}">{{ mt.name }}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+    </form>
+</div>

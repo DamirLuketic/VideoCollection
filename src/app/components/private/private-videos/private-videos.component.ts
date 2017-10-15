@@ -48,6 +48,16 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
     }
   }
 
+    getMediaTypeName(type_id = null) {
+      if (type_id != null) {
+          for (const mt of this.mediaTypes) {
+              if (mt.id === type_id) {
+                  return mt.name;
+              }
+          }
+      }
+    }
+
   ngOnDestroy() {
     if (this.personalCollectionSubscribe != null) {
       this.personalCollectionSubscribe.unsubscribe();
