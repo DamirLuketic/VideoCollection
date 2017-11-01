@@ -4,8 +4,24 @@
             <legend>Add video to collection</legend>
             <div class="row">
 
+                <!-- Title -->
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="title">Title*:</label>
+                        <input type="text" id="title" formControlName="title" class="form-control">
+                    </div>
+                </div>
+
+                <!-- Year -->
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="year">Year:</label>
+                        <input type="number" id="year" formControlName="year" min="1900" max="2100" class="form-control">
+                    </div>
+                </div>
+
                 <!-- Media type -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="mediaType">Media type:</label>
                         <select id="mediaType" class="form-control" formControlName="media_type_id">
@@ -13,6 +29,26 @@
                         </select>
                     </div>
                 </div>
+
+                <!-- Condition -->
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="condition">Condition:</label>
+                        <select id="condition" class="form-control" formControlName="condition_id">
+                            <option *ngFor="let c of conditions" value="{{ c.id }}">{{ c.name }}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <p><b>Genres:</b></p>
+                    <select2 id="select2Genres"
+                             [data]="genresData"
+                             [options]="genresOptions"
+                    ></select2>
+                </div>
+
 
             </div>
         </fieldset>

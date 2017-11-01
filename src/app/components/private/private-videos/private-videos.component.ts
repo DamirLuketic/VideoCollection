@@ -50,7 +50,7 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
 
     getMediaTypeName(type_id = null) {
       if (type_id != null) {
-          for (const mt of this.mediaTypes) {
+          for (let mt of this.mediaTypes) {
               if (mt.id === type_id) {
                   return mt.name;
               }

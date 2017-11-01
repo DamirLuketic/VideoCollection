@@ -36,6 +36,8 @@ import { MessageService } from "./shared/services/message.service";
 import { CountriesService } from "./shared/services/countries.service";
 import { VideoService } from "./shared/services/video.service";
 import { MediaTypeService } from "./shared/services/media-type.service";
+import { ConditionService } from "./shared/services/condition.service";
+import {GenreService} from "./shared/services/genre.service";
 
 /**
  * Providers
@@ -68,7 +70,9 @@ import { MediaTypeService } from "./shared/services/media-type.service";
               MessageService,
               CountriesService,
               VideoService,
-              MediaTypeService
+              MediaTypeService,
+              ConditionService,
+              GenreService
   ],
   bootstrap: [AppComponent]
 })
