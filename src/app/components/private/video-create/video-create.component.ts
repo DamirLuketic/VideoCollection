@@ -192,6 +192,9 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
       if (this.genresSubscribe != null) {
           this.genresSubscribe.unsubscribe();
       }
+      if (this.countriesSubscribe != null) {
+          this.countriesSubscribe.unsubscribe();
+      }
   }
 
 }
