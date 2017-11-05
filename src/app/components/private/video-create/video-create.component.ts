@@ -80,7 +80,8 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
       asin: [''],
       note: [''],
       private_note: [''],
-      for_change: ['']
+      for_change: [''],
+      media_languages: ['']
   });
 
   ngOnInit() {

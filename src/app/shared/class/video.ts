@@ -8,7 +8,7 @@ export class Video {
                 public theatrical_release_date: string = null, public run_time: string = null,
                 public ean: string = null, public upc: string = null, public isbn: string = null,
                 public asin: string = null, public note: string = null, public private_note: string = null,
-                public for_change: boolean = null
+                public for_change: boolean = null, public media_languages: string = null
     ) {}
 }
 

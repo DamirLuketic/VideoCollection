@@ -4,217 +4,243 @@
             <legend>Add video to collection</legend>
             <div class="row">
 
-                <!-- Directors -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="directors">Directors** (with ","):</label>
-                        <input type="text" id="directors" formControlName="directors" class="form-control">
+                <div class="part-movie">
+
+                    <!-- Directors -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="directors">Directors** (with ","):</label>
+                            <input type="text" id="directors" formControlName="directors" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Title -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="title">Title*:</label>
-                        <input type="text" id="title" formControlName="title" class="form-control">
+                    <!-- Title -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="title">Title*:</label>
+                            <input type="text" id="title" formControlName="title" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Theatrical release date -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="theatricalReleaseDate">Theatrical release date:</label>
-                        <input type="text" id="theatricalReleaseDate" formControlName="theatrical_release_date" class="form-control">
+                    <!-- Release date -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="releaseDate">Release date:</label>
+                            <input type="text" id="releaseDate" formControlName="release_date" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Year -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="year">Year:</label>
-                        <input type="number" id="year" formControlName="year" min="1900" max="2100" class="form-control">
+                    <!-- Theatrical release date -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="theatricalReleaseDate">Theatrical release date:</label>
+                            <input type="text" id="theatricalReleaseDate" formControlName="theatrical_release_date" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Media type -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="mediaType">Media type:</label>
-                        <select id="mediaType" class="form-control" formControlName="media_type_id">
-                            <option *ngFor="let mt of mediaTypes" value="{{ mt.id }}">{{ mt.name }}</option>
-                        </select>
+                    <!-- Run time -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="runTime">Run time:</label>
+                            <input type="text" id="runTime" formControlName="run_time" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Condition -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="condition">Condition:</label>
-                        <select id="condition" class="form-control" formControlName="condition_id">
-                            <option *ngFor="let c of conditions" value="{{ c.id }}">{{ c.name }}</option>
-                        </select>
+                    <!-- Genres -->
+                    <div class="col-md-3">
+                        <p><b>Genres:</b></p>
+                        <select2 id="select2Genres"
+                                 [data]="genresData"
+                                 [options]="genresOptions"
+                        ></select2>
                     </div>
-                </div>
 
-                <!-- Actors -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="actors">Actors** (with ","):</label>
-                        <input type="text" id="actors" formControlName="actors" class="form-control">
+                    <!-- Countries -->
+                    <div class="col-md-3">
+                        <p><b>Countries:</b></p>
+                        <select2 id="select2Countries"
+                                 [data]="countriesData"
+                                 [options]="countriesOptions"
+                        ></select2>
                     </div>
-                </div>
 
-                <!-- Format -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="format">Format:</label>
-                        <input type="text" id="format" formControlName="format" class="form-control">
+                    <!-- Languages -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="languages">languages** (with ","):</label>
+                            <input type="text" id="languages" formControlName="languages" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Languages -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="languages">languages** (with ","):</label>
-                        <input type="text" id="languages" formControlName="languages" class="form-control">
+                    <!-- Actors -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="actors">Actors** (with ","):</label>
+                            <input type="text" id="actors" formControlName="actors" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Subtitles -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="subtiles">Subtitles:</label>
-                        <input type="text" id="subtiles" formControlName="subtiles" class="form-control">
+
+                    <!-- Studio -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="studio">Studio:</label>
+                            <input type="text" id="studio" formControlName="studio" class="form-control">
+                        </div>
                     </div>
+
                 </div>
 
-                <!-- Region -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="region">Region:</label>
-                        <input type="text" id="region" formControlName="region" class="form-control">
+                <hr />
+
+                <div class="part-media">
+
+                    <!-- Year -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="year">Year:</label>
+                            <input type="number" id="year" formControlName="year" min="1900" max="2100" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Aspect ratio -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="aspectRatio">Aspect ratio:</label>
-                        <input type="text" id="aspectRatio" formControlName="aspect_ratio" class="form-control">
+                    <!-- Media type -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="mediaType">Media type:</label>
+                            <select id="mediaType" class="form-control" formControlName="media_type_id">
+                                <option *ngFor="let mt of mediaTypes" value="{{ mt.id }}">{{ mt.name }}</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <!-- FSK -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="fsk">FSK:</label>
-                        <input type="text" id="fsk" formControlName="fsk" class="form-control">
+                    <!-- Condition -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="condition">Condition:</label>
+                            <select id="condition" class="form-control" formControlName="condition_id">
+                                <option *ngFor="let c of conditions" value="{{ c.id }}">{{ c.name }}</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Studio -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="studio">Studio:</label>
-                        <input type="text" id="studio" formControlName="studio" class="form-control">
+                    <!-- Format -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="format">Format:</label>
+                            <input type="text" id="format" formControlName="format" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Release date -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="releaseDate">Release date:</label>
-                        <input type="text" id="releaseDate" formControlName="release_date" class="form-control">
+                    <!-- Media languages -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="mediaLanguages">Media languages (with ","):</label>
+                            <input type="text" id="mediaLanguages" formControlName="media_languages" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Run time -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="runTime">Run time:</label>
-                        <input type="text" id="runTime" formControlName="run_time" class="form-control">
+                    <!-- Subtitles -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="subtiles">Subtitles (with ","):</label>
+                            <input type="text" id="subtiles" formControlName="subtiles" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- EAN -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="ean">EAN:</label>
-                        <input type="text" id="ean" formControlName="ean" class="form-control">
+                    <!-- Region -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="region">Region:</label>
+                            <input type="text" id="region" formControlName="region" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- UPC -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="upc">UPC:</label>
-                        <input type="text" id="upc" formControlName="upc" class="form-control">
+                    <!-- Aspect ratio -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="aspectRatio">Aspect ratio:</label>
+                            <input type="text" id="aspectRatio" formControlName="aspect_ratio" class="form-control">
+                        </div>
                     </div>
+
                 </div>
 
-                <!-- ISBN -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="isbn">ISBN:</label>
-                        <input type="text" id="isbn" formControlName="isbn" class="form-control">
+                <div class="part-code">
+
+                    <!-- FSK -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="fsk">FSK:</label>
+                            <input type="text" id="fsk" formControlName="fsk" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- ASIN -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="asin">ASIN:</label>
-                        <input type="text" id="asin" formControlName="asin" class="form-control">
+                    <!-- EAN -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="ean">EAN:</label>
+                            <input type="text" id="ean" formControlName="ean" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Note -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="note">Note:</label>
-                        <textarea id="note" formControlName="note" class="form-control"></textarea>
+                    <!-- UPC -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="upc">UPC:</label>
+                            <input type="text" id="upc" formControlName="upc" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Private note -->
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="privateNote">Private note:</label>
-                        <textarea id="privateNote" formControlName="private_note" class="form-control"></textarea>
+                    <!-- ISBN -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="isbn">ISBN:</label>
+                            <input type="text" id="isbn" formControlName="isbn" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Genres -->
-                <div class="col-md-3">
-                    <p><b>Genres:</b></p>
-                    <select2 id="select2Genres"
-                             [data]="genresData"
-                             [options]="genresOptions"
-                    ></select2>
-                </div>
-
-                <!-- Countries -->
-                <div class="col-md-3">
-                    <p><b>Countries:</b></p>
-                    <select2 id="select2Countries"
-                             [data]="countriesData"
-                             [options]="countriesOptions"
-                    ></select2>
-                </div>
-
-                <!-- For change -->
-                <div class="col-md-3">
-                    <p><b>For change:</b></p>
-                    <div>
-                        <label>Yes
-                            <input type="radio" formControlName="for_change" [value]="1">
-                        </label>
-                        <label>No
-                            <input type="radio" formControlName="for_change" [value]="0">
-                        </label>
+                    <!-- ASIN -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="asin">ASIN:</label>
+                            <input type="text" id="asin" formControlName="asin" class="form-control">
+                        </div>
                     </div>
+
                 </div>
 
+                <div class="part-private">
+
+                    <!-- Note -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="note">Note:</label>
+                            <textarea id="note" formControlName="note" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Private note -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="privateNote">Private note:</label>
+                            <textarea id="privateNote" formControlName="private_note" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- For change -->
+                    <div class="col-md-3">
+                        <p><b>For change:</b></p>
+                        <div>
+                            <label>Yes
+                                <input type="radio" formControlName="for_change" [value]="1">
+                            </label>
+                            <label>No
+                                <input type="radio" formControlName="for_change" [value]="0">
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
         </fieldset>
