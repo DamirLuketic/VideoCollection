@@ -16,7 +16,7 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
 
     @ViewChild('select2Countries') select2Countries: ElementRef;
 
-    public countriesList: Country[] = null;
+    public countriesList: Array<Country> = null;
     public countriesData: Array<Select2OptionData>;
     public countriesOptions: Select2Options;
     public userCountry: string = '';
@@ -58,6 +58,7 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
             multiple: false,
             theme: 'classic',
             closeOnSelect: true,
+            width: '100%'
         };
     }, 300);
       // JQuery patch for select 2

@@ -11,6 +11,8 @@ import {ConditionService} from "../../../shared/services/condition.service";
 import { Select2OptionData } from "ng2-select2";
 import {GenreService} from "../../../shared/services/genre.service";
 import {Genre} from "../../../shared/class/genre";
+import {Country} from "../../../shared/class/country";
+import {CountriesService} from "../../../shared/services/countries.service";
 
 @Component({
   selector: 'vc-video-create',
@@ -30,9 +32,17 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
      */
   public genres: Array<Genre> = null;
   public genresSubscribe: Subscription = null;
-  public genresData: Array<Select2OptionData> = [{id: '1', text: 'try 1'}, {'id': '2', text: 'try 2'}];
+  public genresData: Array<Select2OptionData>;
   public genresOptions: Select2Options = { multiple: true };
-  public genresValues: Array<string>;
+
+    /**
+     * Countries list (through "Select2")
+     * @type {any}
+     */
+  public countries: Array<Country> = null;
+  public countriesSubscribe: Subscription = null;
+  public countriesData: Array<Select2OptionData>;
+  public countriesOptions: Select2Options;
 
   constructor(
       private authService: AuthService,
@@ -40,7 +50,8 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
       private mediaTypeService: MediaTypeService,
       private formBuilder: FormBuilder,
       private conditionService: ConditionService,
-      private genreService: GenreService
+      private genreService: GenreService,
+      private countryService: CountriesService
   ) {}
 
   public createVideo = this.formBuilder.group({
@@ -73,6 +84,9 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit() {
+      /**
+       * Media types
+       */
       if (this.mediaTypeService.mediaTypesList === null) {
           this.mediaTypesSubscribe = this.mediaTypeService.getMediaTypesList().subscribe(
               (data: Array<MediaType>) => {
@@ -85,6 +99,9 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
       }else {
           this.mediaTypes = this.mediaTypeService.mediaTypesList;
       }
+      /**
+       * Conditions
+       */
       if (this.conditionService.conditionsList === null) {
           this.conditionsSubscribe = this.conditionService.getConditionsList().subscribe(
               (data: Array<Condition>) => {
@@ -97,6 +114,9 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
       }else {
           this.conditions = this.conditionService.conditionsList;
       }
+      /**
+       * Genres
+       */
       if (this.genreService.genresList === null) {
           this.genresSubscribe = this.genreService.getGenresList().subscribe(
               (data: Array<Genre>) => {
@@ -109,19 +129,48 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
       }else {
           this.genres = this.genreService.genresList;
       }
-      // Values for countries select 2
+      // Values for genres select 2
       setTimeout(() => {
           let genresTmp = [];
-          for (let c in this.genres) {
-              genresTmp.push({'id': c, 'text': this.genres[c]});
+          for (let g in this.genres) {
+              genresTmp.push({'id': g, 'text': this.genres[g]});
           }
           this.genresData = genresTmp;
           this.genresOptions = {
               multiple: true,
-              // theme: 'classic',
               // closeOnSelect: true,
+              width: '100%'
           };
       }, 300);
+      /**
+       * Countries
+       */
+      if (this.countryService.countriesList === null) {
+          this.countriesSubscribe = this.countryService.getCountriesList().subscribe(
+          (data: Array<Country>) => {
+              this.countryService.countriesList = data,
+              this.countries = data,
+              console.log(this.countries)
+              },
+              (error) => { console.log(error)}
+          );
+      }else {
+          this.countries = this.countryService.countriesList;
+      }
+      // Values for countries select 2
+      setTimeout(() => {
+          let countriesTmp = [];
+          for (let c in this.countries) {
+              countriesTmp.push({'id': c, 'text': this.countries[c]});
+          }
+          this.countriesData = countriesTmp;
+          this.countriesOptions = {
+              multiple: true,
+              // closeOnSelect: true,
+              width: '100%'
+          };
+      }, 300);
+
 
       // @TODO: Use for form submit
       // let video = new Video();
