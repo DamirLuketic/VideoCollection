@@ -1,3 +1,16 @@
+.selectList > ul{
+    list-style-type: none;
+}
+
+.btnSelect {
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+
+
+
+
 .errorShow {
     border: 1px solid red;
     border-radius: 4px;
@@ -26,3 +39,4 @@ Popup
     font-size: 145%;
     border-radius: 12px;
 }
+

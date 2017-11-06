@@ -183,6 +183,10 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
       //   );
   }
 
+    openSection(section) {
+      console.log(section);
+    }
+
   ngOnDestroy() {
       if (this.mediaTypesSubscribe != null) {
           this.mediaTypesSubscribe.unsubscribe();
