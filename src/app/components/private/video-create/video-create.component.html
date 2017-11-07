@@ -4,21 +4,21 @@
         <div class="col-sm-2">
             <div class="selectList">
                 <ul>
-                    <li><button class="btnSelect btn btn-info" (click)="openSection('part-movie')">Movie</button></li>
-                    <li><button class="btnSelect btn btn-info" (click)="openSection('part-media')">Media</button></li>
-                    <li><button class="btnSelect btn btn-info" (click)="openSection('part-code')">Code</button></li>
-                    <li><button class="btnSelect btn btn-info" (click)="openSection('part-private')">Private</button></li>
+                    <li><button class="btnSelect btn btn-info" (click)="openSection('sectionMovie')">Movie</button></li>
+                    <li><button class="btnSelect btn btn-info" (click)="openSection('sectionMedia')">Media</button></li>
+                    <li><button class="btnSelect btn btn-info" (click)="openSection('sectionCode')">Code</button></li>
+                    <li><button class="btnSelect btn btn-info" (click)="openSection('sectionPrivate')">Private</button></li>
                 </ul>
             </div>
         </div>
 
         <div class="col-sm-10">
-            <form [formGroup]="createVideo">
+            <form [formGroup]="createVideo" (ngSubmit)="submitForm()" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Add video to collection</legend>
                     <div class="row">
 
-                        <div class="part-movie" style="display: none">
+                        <div class="part-movie" [ngClass]="{'hideSection': !sectionMovie}">
 
                             <!-- Directors -->
                             <div class="col-md-3">
@@ -105,9 +105,7 @@
 
                         </div>
 
-                        <hr />
-
-                        <div class="part-media" style="display: none">
+                        <div class="part-media" [ngClass]="{'hideSection': !sectionMedia}">
 
                             <!-- Year -->
                             <div class="col-md-3">
@@ -187,7 +185,7 @@
 
                         </div>
 
-                        <div class="part-code" style="display: none">
+                        <div class="part-code" [ngClass]="{'hideSection': !sectionCode}">
 
                             <!-- EAN -->
                             <div class="col-md-3">
@@ -223,7 +221,7 @@
 
                         </div>
 
-                        <div class="part-private" style="display: none">
+                        <div class="part-private" [ngClass]="{'hideSection': !sectionPrivate}">
 
                             <!-- Note -->
                             <div class="col-md-3">
@@ -254,6 +252,14 @@
                                 </div>
                             </div>
 
+                        </div>
+
+                        <div class="col-md-6 pull-right">
+                            <div class="form-group">
+                                <label for="insert">Insert</label>
+                                <input type="submit" class="btn btn-primary form-control" id="insert"
+                                       [disabled]="!createVideo.valid">
+                            </div>
                         </div>
 
                     </div>

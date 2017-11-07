@@ -26,6 +26,11 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
   private mediaTypesSubscribe: Subscription = null;
   private conditionsSubscribe: Subscription = null;
 
+  public sectionMovie: boolean = true;
+  public sectionMedia: boolean = false;
+  public sectionCode: boolean = false;
+  public sectionPrivate: boolean = false;
+
     /**
      * Genres list (through "Select2")
      * @type {any}
@@ -184,8 +189,37 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
   }
 
     openSection(section) {
-      console.log(section);
+      switch (section) {
+          case 'sectionMovie':
+              this.sectionMovie = true;
+              this.sectionMedia = false;
+              this.sectionCode = false;
+              this.sectionPrivate = false;
+              break;
+          case 'sectionMedia':
+              this.sectionMovie = false;
+              this.sectionMedia = true;
+              this.sectionCode = false;
+              this.sectionPrivate = false;
+              break;
+          case 'sectionCode':
+              this.sectionMovie = false;
+              this.sectionMedia = false;
+              this.sectionCode = true;
+              this.sectionPrivate = false;
+              break;
+          case 'sectionPrivate':
+              this.sectionMovie = false;
+              this.sectionMedia = false;
+              this.sectionCode = false;
+              this.sectionPrivate = true;
+              break;
+        }
     }
+
+   submitForm() {
+      console.log(this.createVideo.value);
+   }
 
   ngOnDestroy() {
       if (this.mediaTypesSubscribe != null) {
