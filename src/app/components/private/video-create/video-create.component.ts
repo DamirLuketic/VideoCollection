@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { VideoService } from "../../../shared/services/video.service";
 import { MediaTypeService } from "../../../shared/services/media-type.service";
 import {Video} from "../../../shared/class/video";
@@ -19,7 +19,9 @@ import {CountriesService} from "../../../shared/services/countries.service";
   templateUrl: './video-create.component.html',
   styleUrls: ['./video-create.component.css']
 })
-export class VideoCreateComponent implements OnInit, OnDestroy {
+export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
+
+  public msgInserted: boolean = false;
 
   public mediaTypes: Array<MediaType> = null;
   public conditions: Array<Condition> = null;
@@ -176,16 +178,6 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
               width: '100%'
           };
       }, 300);
-
-
-      // @TODO: Use for form submit
-      // let video = new Video();
-      // video.user_id  = this.authService.auth.id;
-      // video.title = 'New Movie';
-      //   this.videoService.crateVideo(video).subscribe(
-      //       (data) => console.log(data),
-      //       (error) => console.log(error)
-      //   );
   }
 
     openSection(section) {
@@ -218,8 +210,25 @@ export class VideoCreateComponent implements OnInit, OnDestroy {
     }
 
    submitForm() {
-      console.log(this.createVideo.value);
+         const video: Video = this.createVideo.value;
+         this.videoService.crateVideo(video).subscribe(
+             (data) => {
+                 console.log(data),
+                 this.msgInserted = true;
+                 this.createVideo.reset({user_id: this.authService.auth.id});
+                 this.videoService.personalCollection.push(video);
+                 },
+             (error) => console.log(error)
+         );
    }
+
+    ngDoCheck() {
+        if (this.msgInserted === true) {
+            setTimeout(() => {
+                this.msgInserted = false;
+            }, 1200);
+        }
+    }
 
   ngOnDestroy() {
       if (this.mediaTypesSubscribe != null) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, DoCheck } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../../shared/services/auth.service";
 import { Auth } from "../../../shared/class/auth";
@@ -12,7 +12,7 @@ import { Subscription } from "rxjs/Subscription";
   templateUrl: './private-profile.component.html',
   styleUrls: ['./private-profile.component.css']
 })
-export class PrivateProfileComponent implements OnInit, OnDestroy {
+export class PrivateProfileComponent implements OnInit, OnDestroy, DoCheck {
 
     @ViewChild('select2Countries') select2Countries: ElementRef;
 
@@ -22,6 +22,7 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
     public userCountry: string = '';
     private getCountriesSubscription: Subscription = null;
     private updateSubscription: Subscription = null;
+    public msgUpdated: boolean = false;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -83,8 +84,11 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
     this.updateSubscription = this.authService.update(formValue).subscribe(
         (data: number) => {
             if (+(data) === 1) {
+               this.msgUpdated = true;
                this.authService.auth.is_visible = formValue.is_visible;
                this.authService.auth.country_code = formValue.country_code;
+               this.profileForm.value.is_visible = formValue.is_visible;
+               this.profileForm.value.country_code = formValue.country_code;
             }
         },
         (error) => {
@@ -92,6 +96,14 @@ export class PrivateProfileComponent implements OnInit, OnDestroy {
         }
     );
   }
+
+    ngDoCheck() {
+        if (this.msgUpdated === true) {
+            setTimeout(() => {
+                this.msgUpdated = false;
+            }, 1200);
+        }
+    }
 
   ngOnDestroy() {
     if (this.getCountriesSubscription != null ) {

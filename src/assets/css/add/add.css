@@ -32,12 +32,13 @@ Popup
     right: 150px;
 }
 .popup > .popup-body {
-    padding: 20px;
-    background: #EFE5F5;
-    opacity: 0.97;
-    width: 350px;
+    padding: 2px;
+    background: #34D4FF;
+    opacity: 0.55;
+    width: 250px;
     margin: 40px;
     color: #726E75;
+    font-weight: 600;
     text-align: center;
     font-size: 145%;
     border-radius: 12px;

@@ -72,7 +72,7 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
             this.authError = true;
             this.authErrorMsg = 'False validation data';
             this.loginForm.reset();
-        }else if (+(data) === 1){
+        }else if (+(data) === 1) {
             this.authError = true;
             this.authErrorMsg = 'False password';
             this.loginForm.reset({nameEmail: nameEmail});
@@ -133,7 +133,7 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
 
     passwordLength() {
         const password = this.registerForm.value.password;
-        if (password != null){
+        if (password != null) {
             if (password.length >= 6) {
                 return true;
             }
@@ -151,7 +151,7 @@ export class AuthComponent implements OnInit, OnDestroy, DoCheck {
             setTimeout(() => {
                 this.authError = false;
                 this.authErrorMsg = null;
-                }, 3200);
+                }, 1800);
             }
         }
 
