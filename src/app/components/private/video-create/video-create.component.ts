@@ -210,16 +210,22 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
     }
 
    submitForm() {
-         const video: Video = this.createVideo.value;
-         this.videoService.crateVideo(video).subscribe(
-             (data) => {
-                 console.log(data),
-                 this.msgInserted = true;
-                 this.createVideo.reset({user_id: this.authService.auth.id});
-                 this.videoService.personalCollection.push(video);
-                 },
-             (error) => console.log(error)
-         );
+        if (this.createVideo.value.title === '' || this.createVideo.value.title === null) {
+          alert('Movie title required');
+          this.openSection('sectionMovie');
+        }else {
+            let video: Video = this.createVideo.value;
+            this.videoService.crateVideo(video).subscribe(
+                (data) => {
+                    console.log(data),
+                    this.msgInserted = true;
+                    this.openSection('sectionMovie');
+                    this.createVideo.reset({user_id: this.authService.auth.id});
+                    this.videoService.personalCollection.push(video);
+                },
+                (error) => console.log(error)
+            );
+        }
    }
 
     ngDoCheck() {

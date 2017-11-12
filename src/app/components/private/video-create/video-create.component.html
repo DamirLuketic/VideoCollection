@@ -60,24 +60,6 @@
                                 </div>
                             </div>
 
-                            <!-- Genres -->
-                            <div class="col-md-3">
-                                <p><b>Genres:</b></p>
-                                <select2 id="select2Genres"
-                                         [data]="genresData"
-                                         [options]="genresOptions"
-                                ></select2>
-                            </div>
-
-                            <!-- Countries -->
-                            <div class="col-md-3">
-                                <p><b>Countries:</b></p>
-                                <select2 id="select2Countries"
-                                         [data]="countriesData"
-                                         [options]="countriesOptions"
-                                ></select2>
-                            </div>
-
                             <!-- Languages -->
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -94,13 +76,30 @@
                                 </div>
                             </div>
 
-
                             <!-- Studio -->
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="studio">Studio:</label>
                                     <input type="text" id="studio" formControlName="studio" class="form-control">
                                 </div>
+                            </div>
+
+                            <!-- Genres -->
+                            <div class="col-md-3">
+                                <p><b>Genres:</b></p>
+                                <select2 id="select2Genres"
+                                         [data]="genresData"
+                                         [options]="genresOptions"
+                                ></select2>
+                            </div>
+
+                            <!-- Countries -->
+                            <div class="col-md-3">
+                                <p><b>Countries:</b></p>
+                                <select2 id="select2Countries"
+                                         [data]="countriesData"
+                                         [options]="countriesOptions"
+                                ></select2>
                             </div>
 
                         </div>
@@ -257,8 +256,7 @@
                         <div class="col-md-6 pull-right">
                             <div class="form-group">
                                 <label for="insert">Insert</label>
-                                <input type="submit" class="btn btn-primary form-control" id="insert"
-                                       [disabled]="!createVideo.valid">
+                                <input type="submit" class="btn btn-primary form-control" id="insert">
                             </div>
                         </div>
 
