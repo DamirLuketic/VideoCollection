@@ -58,6 +58,21 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
       }
     }
 
+  deleteVideo(video) {
+      const answer = confirm('Are you sure?');
+      if (answer) {
+          this.videoService.deleteVideo(video.id).subscribe(
+              (data: string) => {
+                  const personalVideos = this.videoService.personalCollection;
+                  const currentIndex = personalVideos.indexOf(video);
+                  personalVideos.splice(currentIndex, 1);
+                  this.personalCollection = this.videoService.personalCollection;
+              },
+              (error) => { console.log(error); }
+          );
+      }
+  }
+
   ngOnDestroy() {
     if (this.personalCollectionSubscribe != null) {
       this.personalCollectionSubscribe.unsubscribe();

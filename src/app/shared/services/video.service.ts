@@ -25,4 +25,8 @@ export class VideoService {
   crateVideo(video: Video) {
     return this.http.post(this.apiRoute + 'video', video);
   }
+
+  deleteVideo(video_id) {
+    return this.http.delete(this.apiRoute + 'video/' + video_id);
+  }
 }
