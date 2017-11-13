@@ -16,6 +16,7 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
   public mediaTypes: Array<MediaType> = null;
   private personalCollectionSubscribe: Subscription = null;
   private mediaTypesSubscribe: Subscription = null;
+  private deleteVideoSubscribe: Subscription = null;
 
   constructor(
       private videoService: VideoService,
@@ -61,7 +62,7 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
   deleteVideo(video) {
       const answer = confirm('Are you sure?');
       if (answer) {
-          this.videoService.deleteVideo(video.id).subscribe(
+          this.deleteVideoSubscribe = this.videoService.deleteVideo(video.id).subscribe(
               (data: string) => {
                   const personalVideos = this.videoService.personalCollection;
                   const currentIndex = personalVideos.indexOf(video);
@@ -75,10 +76,13 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.personalCollectionSubscribe != null) {
-      this.personalCollectionSubscribe.unsubscribe();
+        this.personalCollectionSubscribe.unsubscribe();
     }
     if (this.mediaTypesSubscribe != null) {
         this.mediaTypesSubscribe.unsubscribe();
+    }
+    if (this.deleteVideoSubscribe != null) {
+        this.deleteVideoSubscribe.unsubscribe();
     }
   }
 }

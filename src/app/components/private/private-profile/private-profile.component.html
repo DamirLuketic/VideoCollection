@@ -1,40 +1,41 @@
 <div class="container">
-<div class="row">
-    <div class="col-lg-6 col-lg-offset-3">
-        <form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
-            <div class="row">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
+                <div class="row">
 
-                <div class="col-xs-12">
-                    <p><b>Profile visible:</b></p>
-                    <div>
-                        <label>Yes
-                            <input type="radio" formControlName="is_visible" [value]="1">
-                        </label>
-                        <label>No
-                            <input type="radio" formControlName="is_visible" [value]="0">
-                        </label>
+                    <div class="col-xs-12">
+                        <p><b>Profile visible:</b></p>
+                        <div>
+                            <label>Yes
+                                <input type="radio" formControlName="is_visible" [value]="1">
+                            </label>
+                            <label>No
+                                <input type="radio" formControlName="is_visible" [value]="0">
+                            </label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12">
-                    <p><b>Country:</b></p>
-                    <select2 #select2Countries
-                             id="select2Countries"
-                             [data]="countriesData"
-                             [options]="countriesOptions"
-                             [value]="userCountry ? userCountry.split(',') : ''"
-                            ></select2>
-                </div>
+                    <div class="col-xs-12">
+                        <p><b>Country:</b></p>
+                        <select2 #select2Countries
+                                 id="select2Countries"
+                                 [data]="countriesData"
+                                 [options]="countriesOptions"
+                                 [value]="userCountry ? userCountry.split(',') : ''"
+                        ></select2>
+                        <h4>Your current country: "{{ showUserCountry }}"</h4>
+                    </div>
 
-                <div class="col-xs-12">
-                    <br />
-                    <button type="submit" class="btn btn-success pull-right" [disabled]="!profileForm.valid">Update</button>
-                </div>
+                    <div class="col-xs-12">
+                        <br />
+                        <button type="submit" class="btn btn-success pull-right" [disabled]="!profileForm.valid">Update</button>
+                    </div>
 
-            </div>
-        </form>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
     <div [hidden]="!msgUpdated">
         <div class="popup">
@@ -45,5 +46,3 @@
     </div>
 
 </div>
-
-

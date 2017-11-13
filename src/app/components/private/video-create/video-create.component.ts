@@ -41,6 +41,7 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
   public genresSubscribe: Subscription = null;
   public genresData: Array<Select2OptionData>;
   public genresOptions: Select2Options = { multiple: true };
+  public selectedGenres: Array<string>;
 
     /**
      * Countries list (through "Select2")
@@ -50,6 +51,7 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
   public countriesSubscribe: Subscription = null;
   public countriesData: Array<Select2OptionData>;
   public countriesOptions: Select2Options;
+  public selectedCountries: Array<string>;
 
   constructor(
       private authService: AuthService,
@@ -68,7 +70,7 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
       title: ['', Validators.required],
       year: [''],
       genres: [''],
-      country_code: [''],
+      country_code: [],
       directors: [''],
       actors: [''],
       format: [''],
@@ -150,6 +152,17 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
               width: '100%'
           };
       }, 300);
+      // JQuery patch for select 2
+      $('#select2Genres').on("change", () => {
+          let genresID = [];
+          let result = $('#select2Genres option:selected');
+          for (let r in result) {
+              if (result[r]['value'] !== undefined) {
+                  genresID.push(result[r]['value']);
+              }
+          }
+          this.selectedGenres = genresID;
+      });
       /**
        * Countries
        */
@@ -178,6 +191,17 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
               width: '100%'
           };
       }, 300);
+      // JQuery patch for select 2
+      $('#select2Countries').on("change", () => {
+          let countriesCode = [];
+          let result = $('#select2Countries option:selected');
+          for (let r in result) {
+              if (result[r]['value'] !== undefined) {
+                  countriesCode.push(result[r]['value']);
+              }
+          }
+          this.selectedCountries = countriesCode;
+      });
   }
 
     openSection(section) {
@@ -215,6 +239,8 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
           this.openSection('sectionMovie');
         }else {
             let video: Video = this.createVideo.value;
+            video.country_code = this.selectedCountries;
+            video.genres = this.selectedGenres;
             this.videoService.crateVideo(video).subscribe(
                 (data) => {
                     console.log(data),
