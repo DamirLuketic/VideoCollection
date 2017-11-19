@@ -13,7 +13,7 @@
     <tr *ngFor="let v of personalCollection">
       <td>{{ v.title }}</td>
       <td>{{ v.year }}</td>
-      <td>{{ v.genres }}</td>
+      <td>{{ getGenres(v.genres) }}</td>
       <td>{{ v.directors }}</td>
       <td>{{ getMediaTypeName( v.media_type_id )}}</td>
       <td class="videoTools">

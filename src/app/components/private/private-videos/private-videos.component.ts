@@ -4,6 +4,8 @@ import { Video } from "../../../shared/class/video";
 import { Subscription } from "rxjs/Subscription";
 import {MediaTypeService} from "../../../shared/services/media-type.service";
 import {MediaType} from "../../../shared/class/media-type";
+import {split} from "ts-node/dist";
+import {GenreService} from "../../../shared/services/genre.service";
 
 @Component({
   selector: 'vc-private-videos',
@@ -20,7 +22,8 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
 
   constructor(
       private videoService: VideoService,
-      private mediaTypeService: MediaTypeService
+      private mediaTypeService: MediaTypeService,
+      private genreService: GenreService
   ) { }
 
   ngOnInit() {
@@ -49,7 +52,7 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
     }
   }
 
-    getMediaTypeName(type_id = null) {
+  getMediaTypeName(type_id = null) {
       if (type_id != null) {
           for (let mt of this.mediaTypes) {
               if (mt.id === type_id) {
@@ -58,6 +61,32 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
           }
       }
     }
+
+  getGenres(genres) {
+      let names: string = '';
+      for (let g in genres) {
+          if (genres[g].name) {
+              if (+(g) === 0) {
+                  names += genres[g].name;
+              } else if (+(g) === 1) {
+                  names += ', ' + genres[g].name;
+              } else if (+(g) === 2) {
+                  names += ', ...';
+              }
+          } else {
+              const genreList = this.genreService.genresList;
+              if (+(g) === 0) {
+                  names += genreList[genres[g]];
+              } else if (+(g) === 1) {
+                  names += ', ' + genreList[genres[g]];
+              } else if (+(g) === 2) {
+                  names += ', ...';
+              }
+          }
+
+      }
+      return names;
+  }
 
   deleteVideo(video) {
       const answer = confirm('Are you sure?');

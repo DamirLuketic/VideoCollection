@@ -245,6 +245,10 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
                 (data) => {
                     console.log(data),
                     this.msgInserted = true;
+                    $('#select2Countries option:selected').remove();
+                    $('#select2Genres option:selected').remove();
+                    this.selectedGenres = null;
+                    this.selectedCountries = null;
                     this.openSection('sectionMovie');
                     this.createVideo.reset({user_id: this.authService.auth.id});
                     this.videoService.personalCollection.push(video);
