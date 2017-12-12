@@ -28,4 +28,5 @@ table.videoList tr:nth-child(even) {
     Collection tools style
  */
 table.videoList tr > .videoTools > a > i{
+    cursor: pointer;
 }

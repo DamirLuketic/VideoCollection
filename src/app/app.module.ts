@@ -20,6 +20,7 @@ import { UsersComponent } from './components/users/users.component';
 import { PrivateVideosComponent } from './components/private/private-videos/private-videos.component';
 import { PrivateProfileComponent } from './components/private/private-profile/private-profile.component';
 import { VideoCreateComponent } from './components/private/video-create/video-create.component';
+import { VideoViewComponent } from './components/private/video-view/video-view.component';
 
 /**
  * Directives
@@ -37,7 +38,8 @@ import { CountriesService } from "./shared/services/countries.service";
 import { VideoService } from "./shared/services/video.service";
 import { MediaTypeService } from "./shared/services/media-type.service";
 import { ConditionService } from "./shared/services/condition.service";
-import {GenreService} from "./shared/services/genre.service";
+import { GenreService } from "./shared/services/genre.service";
+
 
 /**
  * Providers
@@ -55,6 +57,7 @@ import {GenreService} from "./shared/services/genre.service";
     PrivateVideosComponent,
     PrivateProfileComponent,
     VideoCreateComponent,
+    VideoViewComponent,
   ],
   imports: [
     BrowserModule,

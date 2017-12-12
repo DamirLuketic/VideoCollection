@@ -1,5 +1,3 @@
-import {Genre} from "./genre";
-
 export class Video {
     constructor(public user_id: number = null, public media_type_id: number = null, public condition_id: number = null,
                 public title: string = null, public year: string = null, public genres: Array<string>,
@@ -13,4 +11,3 @@ export class Video {
                 public for_change: boolean = null, public media_languages: string = null, public id: number = null
     ) {}
 }
-

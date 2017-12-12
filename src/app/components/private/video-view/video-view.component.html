@@ -1,3 +1,84 @@
-<p>
-  {{ currentMedia.title }}
-</p>
+<h4>Movie</h4>
+<table>
+  <tr>
+    <th>Directors</th>
+    <th>Title</th>
+    <th>Release year</th>
+    <th>Theatrical release year</th>
+    <th>Run time</th>
+    <th>Languages</th>
+    <th>Actors</th>
+    <th>Studio</th>
+    <th>Genres</th>
+    <th>Countries</th>
+  </tr>
+  <tr>
+    <td>Directors</td>
+    <td>Release year</td>
+    <td>{{ currentMedia.year }}</td>
+    <td>{{ currentMedia.theatrical_release_date }}</td>
+    <td>{{ currentMedia.run_time }}</td>
+    <td>{{ currentMedia.languages }}</td>
+    <td>{{ currentMedia.actors }}</td>
+    <td>{{ currentMedia.studio }}</td>
+    <td>Genres</td>
+    <td>Countries</td>
+  </tr>
+</table>
+
+<h4>Media</h4>
+<table>
+  <tr>
+    <th>Year</th>
+    <th>Media type</th>
+    <th>Condition</th>
+    <th>Format</th>
+    <th>Media languages</th>
+    <th>Subtitles</th>
+    <th>Region</th>
+    <th>Aspect ratio</th>
+    <th>FSK</th>
+  </tr>
+  <tr>
+    <td>Year</td>
+    <td>Media type</td>
+    <td>Condition</td>
+    <td>Format</td>
+    <td>Media languages</td>
+    <td>Subtitles</td>
+    <td>Region</td>
+    <td>Aspect ratio</td>
+    <td>FSK</td>
+  </tr>
+</table>
+
+<h4>Code</h4>
+
+<table>
+  <tr>
+    <th>EAN</th>
+    <th>UPC</th>
+    <th>ISBN</th>
+    <th>ASIN</th>
+  </tr>
+  <tr>
+    <td>EAN</td>
+    <td>UPC</td>
+    <td>ISBN</td>
+    <td>ASIN</td>
+  </tr>
+</table>
+
+<h4>Private</h4>
+<div class="row">
+  <div class="col-md-2">
+    <h5>For change: VALUE</h5>
+  </div>
+  <div class="col-md-5">
+    NOTE
+  </div>
+  <div class="col-md-5">
+    Private note
+  </div>
+</div>
+
