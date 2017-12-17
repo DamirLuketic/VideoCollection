@@ -75,7 +75,7 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
       actors: [''],
       format: [''],
       languages: [''],
-      subtiles: [''],
+      subtitles: [''],
       region: [''],
       aspect_ratio: [''],
       fsk: [''],
