@@ -21,8 +21,8 @@
     <td>{{ currentMedia?.languages }}</td>
     <td>{{ currentMedia?.actors }}</td>
     <td>{{ currentMedia?.studio }}</td>
-    <td>Genres</td>
-    <td>Countries</td>
+    <td>{{ getGenres(currentMedia.genres) }}</td>
+    <td>{{ getCountries(currentMedia.countries) }}</td>
   </tr>
 </table>
 
@@ -41,8 +41,8 @@
   </tr>
   <tr>
     <td>{{ currentMedia?.year }}</td>
-    <td>Media type</td>
-    <td>Condition</td>
+    <td>{{ getMediaTypeName(currentMedia.media_type_id) }}</td>
+    <td>{{ getMediaConditionName(currentMedia.condition_id) }}</td>
     <td>{{ currentMedia?.format }}</td>
     <td>{{ currentMedia?.media_languages }}</td>
     <td>{{ currentMedia?.subtitles }}</td>

@@ -62,31 +62,35 @@ export class PrivateVideosComponent implements OnInit, OnDestroy {
       }
     }
 
-  getGenres(genres) {
-      let names: string = '';
-      for (let g in genres) {
-          if (genres[g].name) {
-              if (+(g) === 0) {
-                  names += genres[g].name;
-              } else if (+(g) === 1) {
-                  names += ', ' + genres[g].name;
-              } else if (+(g) === 2) {
-                  names += ', ...';
-              }
-          } else {
-              const genreList = this.genreService.genresList;
-              if (+(g) === 0) {
-                  names += genreList[genres[g]];
-              } else if (+(g) === 1) {
-                  names += ', ' + genreList[genres[g]];
-              } else if (+(g) === 2) {
-                  names += ', ...';
-              }
-          }
+    getGenres(genres) {
+        if(genres != null) {
+            let names: string = '';
+            for (let g in genres) {
+                if (genres[g].name) {
+                    if (+(g) === 0) {
+                        names += genres[g].name;
+                    } else if (+(g) === 1) {
+                        names += ', ' + genres[g].name;
+                    } else if (+(g) === 2) {
+                        names += ', ...';
+                    }
+                } else {
+                    const genreList = this.genreService.genresList;
+                    if (+(g) === 0) {
+                        names += genreList[genres[g]];
+                    } else if (+(g) === 1) {
+                        names += ', ' + genreList[genres[g]];
+                    } else if (+(g) === 2) {
+                        names += ', ...';
+                    }
+                }
 
-      }
-      return names;
-  }
+            }
+            return names;
+        } else {
+            return '';
+        }
+    }
 
   deleteVideo(video) {
       const answer = confirm('Are you sure?');

@@ -48,7 +48,7 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
      * @type {any}
      */
   public countries: Array<Country> = null;
-  public countriesSubscribe: Subscription = null;
+  private countriesSubscribe: Subscription = null;
   public countriesData: Array<Select2OptionData>;
   public countriesOptions: Select2Options;
   public selectedCountries: Array<string>;
@@ -171,9 +171,9 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
           (data: Array<Country>) => {
               this.countryService.countriesList = data,
               this.countries = data,
-              console.log(this.countries)
+              console.log(this.countries);
               },
-              (error) => { console.log(error)}
+              (error) => { console.log(error); }
           );
       }else {
           this.countries = this.countryService.countriesList;
@@ -251,7 +251,7 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
                     this.selectedCountries = null;
                     this.openSection('sectionMovie');
                     this.createVideo.reset({user_id: this.authService.auth.id});
-                    this.videoService.personalCollection.push(video);
+                    this.videoService.personalCollection = null;
                 },
                 (error) => console.log(error)
             );
