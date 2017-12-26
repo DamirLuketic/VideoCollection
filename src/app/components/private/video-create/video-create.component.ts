@@ -239,7 +239,7 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
           this.openSection('sectionMovie');
         }else {
             let video: Video = this.createVideo.value;
-            video.country_code = this.selectedCountries;
+            video.countries = this.selectedCountries;
             video.genres = this.selectedGenres;
             this.videoService.crateVideo(video).subscribe(
                 (data) => {

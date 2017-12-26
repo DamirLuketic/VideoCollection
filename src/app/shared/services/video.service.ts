@@ -29,4 +29,12 @@ export class VideoService {
   deleteVideo(video_id) {
     return this.http.delete(this.apiRoute + 'video/' + video_id);
   }
+
+  catchVideo(mediaId: number) {
+    return this.http.get(this.apiRoute + 'video/catch/' + mediaId);
+  }
+
+  updateVideo(mediaId: number, video: Video) {
+      return this.http.put(this.apiRoute + 'video/' + mediaId, video);
+  }
 }
