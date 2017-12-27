@@ -10,6 +10,7 @@ import {ConditionService} from "../../../shared/services/condition.service";
 import {Condition} from "../../../shared/class/condition";
 import {Country} from "../../../shared/class/country";
 import {CountriesService} from "../../../shared/services/countries.service";
+import set = Reflect.set;
 
 @Component({
   selector: 'vc-video-view',
@@ -53,11 +54,13 @@ export class VideoViewComponent implements OnInit, OnDestroy {
       }else {
           this.personalMedia = this.videoService.personalCollection;
       }
-      for (let m of this.personalMedia) {
-          if (+(this.mediaId) === +(m.id)) {
-            this.currentMedia = m;
+      setTimeout(() => {
+          for (let m of this.personalMedia) {
+              if (+(this.mediaId) === +(m.id)) {
+                  this.currentMedia = m;
+              }
           }
-      }
+      }, 500);
       if (this.mediaTypeService.mediaTypesList === null) {
           this.mediaTypesSubscribe = this.mediaTypeService.getMediaTypesList().subscribe(
               (data: Array<MediaType>) => {

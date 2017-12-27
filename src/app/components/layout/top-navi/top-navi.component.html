@@ -4,21 +4,21 @@
       <a class="navbar-brand" routerLink='/home'>Video collection</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a routerLink='/home' routerLinkActive="active">Home</a></li>
+      <!--<li><a routerLink='/home' routerLinkActive="active">Home</a></li>-->
       <ng-template #authRoute>
         <li class="dropdown" vcDropdown>
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Private
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a routerLink="/private/video/create" routerLinkActive="active">New video</a></li>
             <li><a routerLink="/private/videos" routerLinkActive="active">List</a></li>
+            <li><a routerLink="/private/video/create" routerLinkActive="active">New video</a></li>
             <li><a routerLink="/private/profile" routerLinkActive="active">Profile</a></li>
           </ul>
         </li>
-        <li><a routerLink='/videos' routerLinkActive="active">Videos</a></li>
-        <li><a routerLink='/users' routerLinkActive="active">Users</a></li>
+        <!--<li><a routerLink='/users' routerLinkActive="active">Users</a></li>-->
         <li (click)="logout()"><a routerLink='/auth'>Log out</a></li>
       </ng-template>
+      <li><a routerLink='/videos' routerLinkActive="active">Videos</a></li>
         <li *ngIf="!isAuth(); else authRoute"><a routerLink='/auth'>LogIn \ Register</a></li>
     </ul>
   </div>
