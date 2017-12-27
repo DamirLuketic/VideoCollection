@@ -120,7 +120,7 @@
                 <div class="form-group">
                   <label for="mediaType">Media type:</label>
                   <select id="mediaType" class="form-control" formControlName="media_type_id">
-                    <option *ngFor="let mt of mediaTypes" value="{{ mt.id }}">{{ mt.name }}</option>
+                    <option *ngFor="let mt of mediaTypes" value="{{ mt.id }}" [selected]="currentMedia?.media_type_id">{{ mt.name }}</option>
                   </select>
                 </div>
               </div>
@@ -130,7 +130,7 @@
                 <div class="form-group">
                   <label for="condition">Condition:</label>
                   <select id="condition" class="form-control" formControlName="condition_id">
-                    <option *ngFor="let c of conditions" value="{{ c.id }}">{{ c.name }}</option>
+                    <option *ngFor="let c of conditions" value="{{ c.id }}" [selected]="currentMedia?.condition_id">{{ c.name }}</option>
                   </select>
                 </div>
               </div>
@@ -244,10 +244,10 @@
                 <p><b>For change:</b></p>
                 <div>
                   <label>Yes
-                    <input type="radio" formControlName="for_change" [value]="1">
+                    <input type="radio" formControlName="for_change" [value]="1" [checked]="currentMedia?.for_change == 1">
                   </label>
                   <label>No
-                    <input type="radio" formControlName="for_change" [value]="0">
+                    <input type="radio" formControlName="for_change" [value]="0" [checked]="currentMedia?.for_change == 0">
                   </label>
                 </div>
               </div>
