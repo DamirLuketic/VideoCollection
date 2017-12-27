@@ -13,6 +13,7 @@ import {GenreService} from "../../../shared/services/genre.service";
 import {Country} from "../../../shared/class/country";
 import {Select2OptionData} from "ng2-select2";
 import {CountriesService} from "../../../shared/services/countries.service";
+import {AuthService} from "../../../shared/services/auth.service";
 
 @Component({
   selector: 'vc-video-edit',
@@ -22,6 +23,7 @@ import {CountriesService} from "../../../shared/services/countries.service";
 export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
 
   public msgInserted: boolean = false;
+  public msgError: boolean = false;
 
   public mediaId: number = null;
   public currentMedia: Video = null;
@@ -31,6 +33,7 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
   private currentMediaSubscription: Subscription = null;
   private mediaTypesSubscribe: Subscription = null;
   private conditionsSubscribe: Subscription = null;
+  public userId: number = null;
 
     public sectionMovie: boolean = true;
     public sectionMedia: boolean = false;
@@ -58,6 +61,7 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
     public selectedCondition: number;
 
     public editVideo = this.formBuilder.group({
+        user_id: ['', Validators.required],
         media_type_id: [''],
         condition_id: [''],
         title: ['' , Validators.required],
@@ -93,10 +97,12 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
       private mediaTypeService: MediaTypeService,
       private conditionService: ConditionService,
       private genreService: GenreService,
-      private countryService: CountriesService
+      private countryService: CountriesService,
+      private authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.userId = this.authService.auth.id;
     this.mediaIdSubcribe = this.route.params.subscribe(
         (params) => { this.mediaId = +params['mediaId']; }
     );
@@ -290,9 +296,12 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
             video.condition_id = this.selectedCondition;
             this.videoService.updateVideo(this.currentMedia.id, video).subscribe(
                 (data) => {
-                    console.log(data);
-                    this.msgInserted = true;
-                    this.videoService.personalCollection = null;
+                    if (data[0] == true) {
+                        this.msgInserted = true;
+                        this.videoService.personalCollection = null;
+                    } else {
+                        this.msgError = true;
+                    }
                 },
                 (error) => console.log(error)
             );
@@ -334,9 +343,15 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
                 this.msgInserted = false;
             }, 1200);
         }
+        if (this.msgError === true) {
+            setTimeout(() => {
+                this.msgError = false;
+            }, 1200);
+        }
         if (this.editVideo.value.title === '' || this.editVideo.value.title === null) {
             setTimeout(() => {
                 this.editVideo.value.title = this.currentMedia.title;
+                this.editVideo.value.user_id  = this.userId;
             }, 500);
         }
     }
