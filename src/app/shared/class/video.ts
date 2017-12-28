@@ -9,6 +9,6 @@ export class Video {
                 public ean: string = null, public upc: string = null, public isbn: string = null,
                 public asin: string = null, public note: string = null, public private_note: string = null,
                 public for_change: boolean = null, public media_languages: string = null, public id: number = null,
-                public price: string = null
+                public price: string = null, public user_email: string = null
     ) {}
 }
