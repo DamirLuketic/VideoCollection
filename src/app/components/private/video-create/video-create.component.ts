@@ -90,7 +90,8 @@ export class VideoCreateComponent implements OnInit, OnDestroy, DoCheck {
       note: [''],
       private_note: [''],
       for_change: [''],
-      media_languages: ['']
+      media_languages: [''],
+      price: ['']
   });
 
   ngOnInit() {

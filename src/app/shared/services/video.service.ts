@@ -9,6 +9,7 @@ import {Observable} from "rxjs/Observable";
 export class VideoService {
 
   public personalCollection: Array<Video> = null;
+  public videoCollection: Array<Video> = null;
   private apiRoute: string = this.root.apiRoute;
 
   constructor(
@@ -21,6 +22,10 @@ export class VideoService {
     const user_id = this.authService.auth.id;
     return this.http.post(this.apiRoute + 'video/personal', user_id);
   }
+
+  catchVideos() {
+        return this.http.get(this.apiRoute + 'video/collection');
+    }
 
   crateVideo(video: Video) {
     return this.http.post(this.apiRoute + 'video', video);

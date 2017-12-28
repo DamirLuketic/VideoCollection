@@ -22,6 +22,7 @@ import { PrivateProfileComponent } from './components/private/private-profile/pr
 import { VideoCreateComponent } from './components/private/video-create/video-create.component';
 import { VideoViewComponent } from './components/private/video-view/video-view.component';
 import { VideoEditComponent } from './components/private/video-edit/video-edit.component';
+import { ViewComponent } from './components/view/view.component';
 
 /**
  * Directives
@@ -42,8 +43,10 @@ import { ConditionService } from "./shared/services/condition.service";
 import { GenreService } from "./shared/services/genre.service";
 
 /**
- * Providers
+ * Guards
  */
+import {AuthGuard} from "./shared/guards/auth-guard.service";
+
 
 @NgModule({
   declarations: [
@@ -59,6 +62,7 @@ import { GenreService } from "./shared/services/genre.service";
     VideoCreateComponent,
     VideoViewComponent,
     VideoEditComponent,
+    ViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,8 @@ import { GenreService } from "./shared/services/genre.service";
               VideoService,
               MediaTypeService,
               ConditionService,
-              GenreService
+              GenreService,
+              AuthGuard
   ],
   bootstrap: [AppComponent]
 })
