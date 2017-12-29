@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
 import {Auth} from "../../../shared/class/auth";
-import {CookieService} from "angular2-cookie/core";
+
 import {Router} from "@angular/router";
+import {CookieService} from "ngx-cookie";
 
 @Component({
   selector: 'vc-top-navi',
@@ -15,7 +16,6 @@ export class TopNaviComponent implements OnInit {
       private authService: AuthService,
       private cookiService: CookieService,
       private router: Router,
-      private cookieService: CookieService
   )
   { }
 
@@ -29,7 +29,7 @@ export class TopNaviComponent implements OnInit {
 
   logout(){
     this.authService.auth = null;
-    this.cookieService.removeAll();
+    this.cookiService.removeAll();
     this.router.navigate(['/home']);
   }
 

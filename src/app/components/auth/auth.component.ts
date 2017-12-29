@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
-import { CookieService } from "angular2-cookie/core";
+
 import { AuthService } from "../../shared/services/auth.service";
 import { Subscription } from "rxjs/Subscription";
 import { Login } from "../../shared/class/login";
@@ -8,6 +8,7 @@ import { Register } from "../../shared/class/register";
 import { Router } from "@angular/router";
 import { MessageService } from "../../shared/services/message.service";
 import {Auth} from "../../shared/class/auth";
+import {CookieService} from "ngx-cookie";
 
 @Component({
   selector: 'vc-auth',

@@ -34,7 +34,6 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
  */
 import { RootService } from "./shared/services/root.service";
 import { AuthService } from "./shared/services/auth.service";
-import { CookieService } from "angular2-cookie/core";
 import { MessageService } from "./shared/services/message.service";
 import { CountriesService } from "./shared/services/countries.service";
 import { VideoService } from "./shared/services/video.service";
@@ -46,6 +45,7 @@ import { GenreService } from "./shared/services/genre.service";
  * Guards
  */
 import {AuthGuard} from "./shared/guards/auth-guard.service";
+import {CookieModule} from "ngx-cookie";
 
 
 @NgModule({
@@ -69,12 +69,12 @@ import {AuthGuard} from "./shared/guards/auth-guard.service";
       HttpClientModule,
       routes,
       ReactiveFormsModule,
-      Select2Module
+      Select2Module,
+      CookieModule.forRoot()
   ],
   providers: [
               RootService,
               AuthService,
-              CookieService,
               MessageService,
               CountriesService,
               VideoService,
