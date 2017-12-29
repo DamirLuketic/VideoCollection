@@ -33,7 +33,6 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
   private currentMediaSubscription: Subscription = null;
   private mediaTypesSubscribe: Subscription = null;
   private conditionsSubscribe: Subscription = null;
-  public userId: number = null;
 
     public sectionMovie: boolean = true;
     public sectionMedia: boolean = false;
@@ -103,7 +102,6 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
   ) { }
 
   ngOnInit() {
-    this.userId = this.authService.auth.id;
     this.mediaIdSubcribe = this.route.params.subscribe(
         (params) => { this.mediaId = +params['mediaId']; }
     );
@@ -295,6 +293,7 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
             video.genres = this.selectedGenres;
             video.media_type_id = this.selectedMediaType;
             video.condition_id = this.selectedCondition;
+            video.user_id = this.authService.auth.id;
             this.videoService.updateVideo(this.currentMedia.id, video).subscribe(
                 (data) => {
                     if (data[0] == true) {
@@ -352,7 +351,6 @@ export class VideoEditComponent implements OnInit, OnDestroy, DoCheck {
         if (this.editVideo.value.title === '' || this.editVideo.value.title === null) {
             setTimeout(() => {
                 this.editVideo.value.title = this.currentMedia.title;
-                this.editVideo.value.user_id  = this.userId;
             }, 500);
         }
     }
