@@ -1,3 +1,5 @@
+# Angular appliaction for menage media collection (Laravel API).
+
 # Personal
     -> ng cli -> ng g c xy -> if inside app/components -> in module adjust path 
 
